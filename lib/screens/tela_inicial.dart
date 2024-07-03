@@ -34,8 +34,8 @@ class _InitialScreenState extends State<InitialScreen> {
               Tasks('Ler 50 páginas', 'assets/images/ler.jpg', 1),
               Tasks('Meditar', 'assets/images/meditar.jpeg', 4),
               Tasks(
-                'Jogar',
-                'assets/images/jogar.jpg',
+                'Estudar Inglês',
+                'assets/images/aprender inglês.jpeg',
                 0,
               ),
               SizedBox(
