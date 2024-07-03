@@ -1,4 +1,3 @@
-
 import 'package:alura_flutter_curso_1/components/difficulty.dart';
 import 'package:flutter/material.dart';
 
@@ -83,23 +82,18 @@ class _TasksState extends State<Tasks> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Container(
-                          height: 52,
-                          width: 52,
-                          child: ElevatedButton(
-                            onPressed: levelUp,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: const [
-                                Icon(Icons.arrow_drop_up),
-                                Text(
-                                  'UP',
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
+                        padding: const EdgeInsets.all(8.0),
+                        child: ElevatedButton(
+                          onPressed: levelUp,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.arrow_drop_up),
+                              Text(
+                                'UP',
+                                style: TextStyle(fontSize: 8),
+                              ),
+                            ],
                           ),
                         ),
                       )
