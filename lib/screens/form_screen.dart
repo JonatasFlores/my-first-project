@@ -80,24 +80,25 @@ class _FormScreenState extends State<FormScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
-                        onChanged: (text) {
-                          setState(() {});
-                        },
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            print('Adicione uma URL');
-                          }
-                          return null;
-                        },
-                        keyboardType: TextInputType.url,
-                        controller: imageController,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Imagem',
-                          fillColor: Colors.white70,
-                          filled: true,
-                        )),
+                      onChanged: (text) {
+                        setState(() {});
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          print('Adicione uma URL');
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.url,
+                      controller: imageController,
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Imagem',
+                        fillColor: Colors.white70,
+                        filled: true,
+                      ),
+                    ),
                   ),
                   Container(
                     height: 100,
@@ -128,6 +129,11 @@ class _FormScreenState extends State<FormScreen> {
                           print(difficultyController.text);
                           print(imageController.text);
                         }
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content:
+                                  Text('Por favor, preencha todos os campos')),
+                        );
                       },
                       child: Text('Adicionar'))
                 ],
