@@ -85,7 +85,7 @@ class _FormScreenState extends State<FormScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          print('Adicione uma URL');
+                          return('Adicione uma URL');
                         }
                         return null;
                       },
@@ -131,8 +131,8 @@ class _FormScreenState extends State<FormScreen> {
                         }
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content:
-                                  Text('Por favor, preencha todos os campos')),
+                            content: Text('Tarefa Adicionada Com Sucesso'),
+                          ),
                         );
                       },
                       child: Text('Adicionar'))
