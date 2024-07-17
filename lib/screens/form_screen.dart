@@ -85,7 +85,7 @@ class _FormScreenState extends State<FormScreen> {
                       },
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return('Adicione uma URL');
+                          return ('Adicione uma URL');
                         }
                         return null;
                       },
@@ -128,12 +128,12 @@ class _FormScreenState extends State<FormScreen> {
                           print(nameController.text);
                           print(difficultyController.text);
                           print(imageController.text);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Tarefa Adicionada Com Sucesso'),
+                            ),
+                          );
                         }
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Tarefa Adicionada Com Sucesso'),
-                          ),
-                        );
                       },
                       child: Text('Adicionar'))
                 ],
