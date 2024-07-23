@@ -152,6 +152,7 @@ class _FormScreenState extends State<FormScreen> {
                               content: Text('Tarefa Adicionada Com Sucesso'),
                             ),
                           );
+                          Navigator.pop(context);
                         } else {
                           // Se a URL não é válida, exibe uma mensagem de erro usando um SnackBar
                           ScaffoldMessenger.of(context).showSnackBar(
