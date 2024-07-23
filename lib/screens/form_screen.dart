@@ -131,33 +131,42 @@ class _FormScreenState extends State<FormScreen> {
                         // Obtém a URL da imagem do controlador de texto
                         final imageUrl = imageController.text;
 
-                        // Faz uma requisição HTTP HEAD para verificar os cabeçalhos da URL fornecida
-                        final response = await http.head(Uri.parse(imageUrl));
+                        try {
+                          // Faz uma requisição HTTP HEAD para verificar os cabeçalhos da URL fornecida
+                          final response = await http.head(Uri.parse(imageUrl));
 
-                        // Verifica se o status da resposta é 200 (OK) e se o cabeçalho 'content-type' começa com 'image/'
-                        if (response.statusCode == 200 &&
-                            response.headers['content-type']
-                                    ?.startsWith('image/') ==
-                                true) {
-                          // Se a URL refere-se a uma imagem válida, imprime os valores dos controladores de texto no console
-                          print(nameController.text); // Imprime o nome
-                          print(difficultyController
-                              .text); // Imprime a dificuldade
-                          print(
-                              imageController.text); // Imprime a URL da imagem
+                          // Verifica se o status da resposta é 200 (OK) e se o cabeçalho 'content-type' existe e começa com 'image/'
+                          if (response.statusCode == 200 &&
+                              response.headers['content-type']
+                                      ?.startsWith('image/') ==
+                                  true) {
+                            // Se a URL refere-se a uma imagem válida, imprime os valores dos controladores de texto no console
+                            print(nameController.text); // Imprime o nome
+                            print(difficultyController
+                                .text); // Imprime a dificuldade
+                            print(imageController
+                                .text); // Imprime a URL da imagem
 
-                          // Exibe uma mensagem de sucesso usando um SnackBar
+                            // Exibe uma mensagem de sucesso usando um SnackBar
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Tarefa Adicionada Com Sucesso'),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          } else {
+                            // Se a URL não é válida, exibe uma mensagem de erro usando um SnackBar
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('URL da imagem inválida'),
+                              ),
+                            );
+                          }
+                        } catch (e) {
+                          // Em caso de exceção na requisição HTTP, exibe uma mensagem de erro usando um SnackBar
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Tarefa Adicionada Com Sucesso'),
-                            ),
-                          );
-                          Navigator.pop(context);
-                        } else {
-                          // Se a URL não é válida, exibe uma mensagem de erro usando um SnackBar
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('URL da imagem inválida'),
+                            SnackBar(
+                              content: Text('Erro ao verificar a URL: $e'),
                             ),
                           );
                         }
