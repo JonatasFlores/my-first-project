@@ -12,62 +12,88 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Login',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+        child: Form(
+          key: formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            SizedBox(height: 32),
-            _buildTextField(
-              emailController,
-              'E-mail',
-            ),
-            SizedBox(height: 8),
-            _buildTextField(
-              passwordController,
-              'Senha',
-            ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (users.any(
-                    (element) =>
-                        element.email == emailController.text &&
-                        element.password == passwordController.text,
-                  )) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => InitialScreen()),
-                      ),
-                    );
+              SizedBox(height: 32),
+              _buildTextField(
+                emailController,
+                'E-mail',
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Campo Vazio';
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Login Inválido')));
+                    if (!value.contains('@') || !value.contains('.com')) {
+                      return 'E-mail Inválido';
+                    }
                   }
-                  ;
+                  return null;
                 },
-                child: Text(
-                  'Entrar',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
+              ),
+              SizedBox(height: 8),
+              _buildTextField(
+                passwordController,
+                'Senha',
+                (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Campo Vazio';
+                  } else {
+                    if (value.length < 3) {
+                      return 'Senha Pequena';
+                    }
+                  }
+                  return null;
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      if (users.any(
+                        (element) =>
+                            element.email == emailController.text &&
+                            element.password == passwordController.text,
+                      )) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => InitialScreen()),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('Login Inválido')));
+                      }
+                      ;
+                    }
+                  },
+                  child: Text(
+                    'Entrar',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -76,8 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
   TextFormField _buildTextField(
     TextEditingController controller,
     String label,
+    String? Function(String?)? validator,
   ) {
     return TextFormField(
+      validator: validator,
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
