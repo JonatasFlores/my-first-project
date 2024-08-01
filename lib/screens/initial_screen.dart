@@ -13,7 +13,7 @@ class _InitialScreenState extends State<InitialScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Task Block'),
+        title: const Text('Tarefas'),
         titleTextStyle: TextStyle(color: Colors.white, fontSize: 24),
         leading: Icon(Icons.add_task),
         backgroundColor: Colors.blue,

@@ -20,7 +20,7 @@ class _FormScreenState extends State<FormScreen> {
         appBar: AppBar(
           backgroundColor: Colors.blue,
           title: Text(
-            'New Task',
+            'Nova Tarefa',
           ),
           titleTextStyle: TextStyle(color: Colors.white, fontSize: 24),
         ),
