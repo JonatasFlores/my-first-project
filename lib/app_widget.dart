@@ -1,4 +1,7 @@
-import 'package:alura_flutter_curso_1/screens/login_screen.dart';
+import 'package:alura_flutter_curso_1/data/task_inherited.dart';
+import 'package:alura_flutter_curso_1/screens/initial_screen.dart';
+// import 'package:alura_flutter_curso_1/screens/initial_screen.dart';
+// import 'package:alura_flutter_curso_1/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatefulWidget {
@@ -17,7 +20,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen(),
+      home: TaskInherited(child: InitialScreen())
     );
   }
 }
