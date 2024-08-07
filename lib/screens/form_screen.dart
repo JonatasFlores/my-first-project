@@ -1,7 +1,12 @@
+import 'package:alura_flutter_curso_1/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class FormScreen extends StatefulWidget {
+
+  final BuildContext taskContext;
+
+  const FormScreen({super.key, required this.taskContext});
   @override
   State<FormScreen> createState() => _FormScreenState();
 }
@@ -130,7 +135,7 @@ class _FormScreenState extends State<FormScreen> {
                       if (_formKey.currentState!.validate()) {
                         // Obtém a URL da imagem do controlador de texto
                         final imageUrl = imageController.text;
-
+                       
                         try {
                           // Faz uma requisição HTTP HEAD para verificar os cabeçalhos da URL fornecida
                           final response = await http.head(Uri.parse(imageUrl));
@@ -141,11 +146,16 @@ class _FormScreenState extends State<FormScreen> {
                                       ?.startsWith('image/') ==
                                   true) {
                             // Se a URL refere-se a uma imagem válida, imprime os valores dos controladores de texto no console
-                            print(nameController.text); // Imprime o nome
-                            print(difficultyController
-                                .text); // Imprime a dificuldade
-                            print(imageController
-                                .text); // Imprime a URL da imagem
+                            // print(nameController.text); // Imprime o nome
+                            // print(difficultyController
+                            //     .text); // Imprime a dificuldade
+                            // print(imageController
+                            //     .text); // Imprime a URL da imagem
+
+                             TaskInherited.of(widget.taskContext).newTask(
+                            nameController.text,
+                            imageController.text,
+                            int.parse(difficultyController.text));
 
                             // Exibe uma mensagem de sucesso usando um SnackBar
                             ScaffoldMessenger.of(context).showSnackBar(
