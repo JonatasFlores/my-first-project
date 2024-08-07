@@ -23,6 +23,7 @@ class _InitialScreenState extends State<InitialScreen> {
         color: Color.fromARGB(255, 208, 221, 237),
         child: ListView(
           children: TaskInherited.of(context).taskList,
+          padding: EdgeInsets.only(top: 8, bottom: 70),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -30,7 +31,9 @@ class _InitialScreenState extends State<InitialScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: ((contextNew) => FormScreen(taskContext: context,)),
+              builder: ((contextNew) => FormScreen(
+                    taskContext: context,
+                  )),
             ),
           );
         },
