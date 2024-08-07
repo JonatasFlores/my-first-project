@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:alura_flutter_curso_1/components/difficulty.dart';
 import 'package:flutter/material.dart';
 
@@ -6,16 +8,14 @@ class Tasks extends StatefulWidget {
   final String foto;
   final int dificuldade;
 
-  const Tasks(this.nome, this.foto, this.dificuldade, {Key? key})
-      : super(key: key);
+  Tasks(this.nome, this.foto, this.dificuldade, {Key? key}) : super(key: key);
+  int level = 1;
 
   @override
   State<Tasks> createState() => _TasksState();
 }
 
 class _TasksState extends State<Tasks> {
-  int level = 1;
-
   bool assetOrNetwork() {
     if (widget.foto.contains('http')) {
       return false;
@@ -25,7 +25,7 @@ class _TasksState extends State<Tasks> {
 
   void levelUp() {
     setState(() {
-      level++;
+      widget.level++;
     });
   }
 
@@ -125,7 +125,7 @@ class _TasksState extends State<Tasks> {
                         child: LinearProgressIndicator(
                           color: Colors.white,
                           value: widget.dificuldade > 0
-                              ? ((level / widget.dificuldade) / 10)
+                              ? ((widget.level / widget.dificuldade) / 10)
                               : 1,
                         ),
                       ),
@@ -133,7 +133,7 @@ class _TasksState extends State<Tasks> {
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Text(
-                        'Nivel: $level',
+                        'Nivel: ${widget.level}',
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
