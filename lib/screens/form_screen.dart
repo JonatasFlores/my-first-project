@@ -145,14 +145,7 @@ class _FormScreenState extends State<FormScreen> {
                               response.headers['content-type']
                                       ?.startsWith('image/') ==
                                   true) {
-                            // Se a URL refere-se a uma imagem válida, imprime os valores dos controladores de texto no console
-                            // print(nameController.text); // Imprime o nome
-                            // print(difficultyController
-                            //     .text); // Imprime a dificuldade
-                            // print(imageController
-                            //     .text); // Imprime a URL da imagem
-
-                             TaskInherited.of(widget.taskContext).newTask(
+                            TaskInherited.of(widget.taskContext).newTask(
                             nameController.text,
                             imageController.text,
                             int.parse(difficultyController.text));
